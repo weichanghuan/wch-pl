@@ -25,7 +25,9 @@ public abstract class Registry {
 
     private Producer producer;
 
-    protected static Map<String, Listener> listenerMap = new ConcurrentHashMap<String, Listener>();
+    private String packageName;
+
+    private static Map<String, Listener> listenerMap = new ConcurrentHashMap<String, Listener>();
 
     synchronized public boolean addListener(Listener listener) {
         String id = getListenerId();

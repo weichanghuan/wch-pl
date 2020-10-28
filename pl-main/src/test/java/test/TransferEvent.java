@@ -1,3 +1,5 @@
+package test;
+
 import org.pl.main.event.Event;
 
 /**
