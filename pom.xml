@@ -14,6 +14,7 @@
         <module>mq-rocket</module>
         <module>mq-kafka</module>
         <module>pl-spring-boot-starter</module>
+        <module>pl-test</module>
     </modules>
 
 

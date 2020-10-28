@@ -80,7 +80,7 @@ public abstract class Registry {
         }
 
         // 直接发布
-        List<String> topicList = null;
+        Set<String> topicList = null;
         try {
             topicList = producer.getTopicList();
         } catch (Exception ex) {
