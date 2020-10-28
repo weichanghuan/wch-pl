@@ -1,14 +1,9 @@
 package test;
 
-import org.pl.main.annotation.MainEventListener;
-import org.pl.main.listener.Listener;
+import org.pl.main.autoregister.AutoRegisterListener;
 import org.pl.main.push.Pusher;
 import org.pl.main.push.impl.DefPusher;
 import org.pl.main.registry.Registry;
-import org.pl.main.utils.AnnotationUtil;
-import org.pl.main.utils.ClassUtil;
-
-import java.util.List;
 
 /**
  * @Author: wch
@@ -22,15 +17,8 @@ public class Test {
 
         // 定义注册中心
         Registry registry = new TransactionRegistry();
-
-        // 获取特定包下所有的类(包括接口和类)
-        List<Class<?>> clsList = ClassUtil.getAllClassByPackageName("test");
-        //输出所有使用了特定注解的类的注解值
-        List<Class<?>> classes = AnnotationUtil.getAnnotationClass(clsList, MainEventListener.class);
-
-        for (Class<?> aClass : classes) {
-            registry.addListener((Listener) aClass.newInstance());
-        }
+        // 自动注册
+        AutoRegisterListener.annotationListener(registry,"test.listener");
 
         // 定义event
         TransferEvent<String> event = new TransferEvent<>();
