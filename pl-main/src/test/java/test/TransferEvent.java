@@ -21,7 +21,7 @@ public class TransferEvent<T> implements Event{
 
     @Override
     public String eventUsed() {
-        return EVENTINAPPLICATION;
+        return EVENTAPPLICATIONROOM;
     }
 
     private String eventId;
