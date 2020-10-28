@@ -10,8 +10,8 @@ import org.pl.main.event.Event;
 public class TransferEvent<T> implements Event{
 
     @Override
-    public String getRegistryId() {
-        return "付款注册中心";
+    public String getRegistryName() {
+        return "TransactionRegistry";
     }
 
     @Override
@@ -21,7 +21,7 @@ public class TransferEvent<T> implements Event{
 
     @Override
     public String eventUsed() {
-        return EVENTAPPLICATIONROOM;
+        return EVENTINAPPLICATION;
     }
 
     private String eventId;

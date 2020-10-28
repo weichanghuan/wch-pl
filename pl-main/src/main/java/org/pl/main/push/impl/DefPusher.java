@@ -1,15 +1,15 @@
 package org.pl.main.push.impl;
 
-import org.pl.main.event.Event;
 import org.apache.commons.lang3.StringUtils;
+import org.pl.main.event.Event;
+import org.pl.main.push.Pusher;
+import org.pl.main.registry.Registry;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.Map;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ConcurrentHashMap;
-import org.pl.main.registry.Registry;
-import org.pl.main.push.Pusher;
 
 /**
  * @Author: wch
@@ -67,8 +67,12 @@ public class DefPusher implements Pusher {
             return false;
         }
 
-        String registryId = event.getRegistryId();
+        String registryId = event.getRegistryName();
         Registry registry = registryList.get(registryId);
+        if (registry == null) {
+            return false;
+        }
+
         try {
             registry.notifyAll(event);
             return true;

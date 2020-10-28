@@ -6,7 +6,7 @@ public interface Event {
 
     String EVENTAPPLICATIONROOM="application romm";
 
-    String getRegistryId();
+    String getRegistryName();
 
     String eventQueue();
 

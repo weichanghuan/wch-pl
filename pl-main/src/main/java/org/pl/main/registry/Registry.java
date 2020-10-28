@@ -9,7 +9,6 @@ import org.pl.mq.api.Producer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
@@ -25,7 +24,6 @@ public abstract class Registry {
 
     private Producer producer;
 
-    private String packageName;
 
     private static Map<String, Listener> listenerMap = new ConcurrentHashMap<String, Listener>();
 
@@ -50,6 +48,8 @@ public abstract class Registry {
 
 
    public abstract String getListenerId();
+
+    public abstract String getRegistryName();
 
 
     public void notifyAll(Event event) {

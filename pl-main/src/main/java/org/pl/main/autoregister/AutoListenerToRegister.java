@@ -8,7 +8,7 @@ import org.pl.main.utils.ClassUtil;
 
 import java.util.List;
 
-public class AutoRegisterListener {
+public class AutoListenerToRegister {
 
     public static void annotationListener(Registry registry, String packageName) {
         List<Class<?>> clsList = ClassUtil.getAllClassByPackageName(packageName);
