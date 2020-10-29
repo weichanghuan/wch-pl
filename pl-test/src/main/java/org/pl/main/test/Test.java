@@ -1,10 +1,12 @@
-package test;
+package org.pl.main.test;
 
 import org.pl.main.autoregister.AutoListenerToRegister;
 import org.pl.main.autoregister.AutoRegisterToPusher;
 import org.pl.main.push.Pusher;
 import org.pl.main.push.impl.DefPusher;
 import org.pl.main.registry.Registry;
+import org.pl.main.test.event.TransferEvent;
+import org.pl.main.test.registry.TransactionRegistry;
 
 /**
  * @Author: wch
@@ -18,8 +20,8 @@ public class Test {
 
         // 定义注册中心
         Registry registry = new TransactionRegistry();
-        // 自动监听者到注册中心
-        AutoListenerToRegister.annotationListener(registry,"test.listener");
+        // 监听者自动注册到注册中心
+        AutoListenerToRegister.annotationListener(registry,"org.pl.main.test.listener");
 
         // 定义event
         TransferEvent<String> event = new TransferEvent<>();
@@ -29,7 +31,8 @@ public class Test {
 
         // 发送
         Pusher pusher = new DefPusher();
-        AutoRegisterToPusher.annotationRegister(pusher,"test");
+        // 注册中心与发送者绑定
+        AutoRegisterToPusher.annotationRegister(pusher,"org.pl.main.test.registry");
         pusher.synSend(event);
 
 

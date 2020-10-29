@@ -1,4 +1,4 @@
-package test;
+package org.pl.main.test.event;
 
 import org.pl.main.event.Event;
 
@@ -9,17 +9,14 @@ import org.pl.main.event.Event;
  */
 public class TransferEvent<T> implements Event{
 
-    @Override
     public String getRegistryName() {
         return "TransactionRegistry";
     }
 
-    @Override
     public String eventQueue() {
         return "transfer";
     }
 
-    @Override
     public String eventUsed() {
         return EVENTINAPPLICATION;
     }

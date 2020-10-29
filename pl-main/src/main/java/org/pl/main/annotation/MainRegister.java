@@ -9,4 +9,6 @@ public @interface MainRegister {
 
     Class<?> pusher();
 
+    String desc()default "";
+
 }

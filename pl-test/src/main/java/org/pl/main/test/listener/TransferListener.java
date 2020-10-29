@@ -1,10 +1,10 @@
-package test.listener;
+package org.pl.main.test.listener;
 
 import org.pl.main.annotation.MainEventListener;
 import org.pl.main.event.Event;
 import org.pl.main.listener.Listener;
-import test.TransactionRegistry;
-import test.TransferEvent;
+import org.pl.main.test.event.TransferEvent;
+import org.pl.main.test.registry.TransactionRegistry;
 
 @MainEventListener(registry = TransactionRegistry.class)
 public class TransferListener extends Listener {

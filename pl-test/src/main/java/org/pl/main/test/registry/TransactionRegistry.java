@@ -1,4 +1,4 @@
-package test;
+package org.pl.main.test.registry;
 
 import org.pl.main.annotation.MainRegister;
 import org.pl.main.push.impl.DefPusher;

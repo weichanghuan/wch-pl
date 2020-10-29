@@ -9,4 +9,6 @@ public @interface MainEventListener {
 
     Class<?> registry();
 
+    String desc()default "";
+
 }
