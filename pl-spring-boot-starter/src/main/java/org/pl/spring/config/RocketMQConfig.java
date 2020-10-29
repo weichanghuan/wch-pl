@@ -6,13 +6,13 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class RocketMQConfig {
 
-    @Value("${spring.rocketmq.username}")
+    @Value("${spring.rocketmq.username:}")
     private String username;
 
-    @Value("${spring.rocketmq.password}")
+    @Value("${spring.rocketmq.password:}")
     private String password;
 
-    @Value("${spring.rocketmq.addresses}")
+    @Value("${spring.rocketmq.addresses:127.0.0.1:9876}")
     private String addresses;
 
 

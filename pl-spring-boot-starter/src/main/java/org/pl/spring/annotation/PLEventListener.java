@@ -13,4 +13,6 @@ public @interface PLEventListener {
 
     Class<?> registry() default DefRegistry.class;
 
+    String desc() default "";
+
 }

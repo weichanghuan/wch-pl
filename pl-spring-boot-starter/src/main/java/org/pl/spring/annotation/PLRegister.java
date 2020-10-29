@@ -14,4 +14,6 @@ public @interface PLRegister {
 
     Class<?> pusher() default DefPusher.class;
 
+    String desc() default "";
+
 }

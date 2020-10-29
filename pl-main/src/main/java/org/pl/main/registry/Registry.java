@@ -97,8 +97,9 @@ public abstract class Registry {
                 break;
             }
         }
-        if (!flag) {
+        if (flag) {
             try {
+                logger.info("topic:{},content:{}",event.eventQueue(),JSON.toJSONString(event));
                 producer.publishMessageSyn(event.eventQueue(), JSON.toJSONString(event));
             } catch (Exception ex) {
                 ex.printStackTrace();

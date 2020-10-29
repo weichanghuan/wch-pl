@@ -1,12 +1,12 @@
-package org.pl.main.test.listener;
+package org.pl.spring.test.listener;
 
-import org.pl.main.annotation.MainEventListener;
 import org.pl.main.event.Event;
 import org.pl.main.listener.Listener;
-import org.pl.main.test.event.TransferEvent;
-import org.pl.main.test.registry.TransactionRegistry;
+import org.pl.spring.annotation.PLEventListener;
+import org.pl.spring.registry.DefRegistry;
+import org.pl.spring.test.event.TransferEvent;
 
-@MainEventListener(registry = TransactionRegistry.class)
+@PLEventListener(registry = DefRegistry.class)
 public class TransferListener extends Listener {
 
     @Override
