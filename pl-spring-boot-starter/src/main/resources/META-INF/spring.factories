@@ -1,0 +1,2 @@
+#-------BankingCircle 自动装配---------
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=com.hadsund.spring.config.PlSpringConfig \
