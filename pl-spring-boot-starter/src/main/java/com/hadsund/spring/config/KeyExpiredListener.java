@@ -21,6 +21,7 @@ import org.springframework.data.redis.listener.RedisMessageListenerContainer;
 import org.springframework.stereotype.Component;
 
 import java.nio.charset.StandardCharsets;
+import java.util.concurrent.TimeUnit;
 
 /**
  * @Author: wch
@@ -31,6 +32,10 @@ import java.nio.charset.StandardCharsets;
 public class KeyExpiredListener extends KeyExpirationEventMessageListener {
 
     private static final Logger logger = LoggerFactory.getLogger(KeyExpiredListener.class);
+
+    private static final long timeout = 20l;
+
+    private static final String LOCKSUFFIX = ".lock";
 
     @Autowired
     private RedisTemplate redisTemplate;
@@ -47,14 +52,16 @@ public class KeyExpiredListener extends KeyExpirationEventMessageListener {
     public void onMessage(Message message, byte[] bytes) {
         String key = new String(message.getBody(), StandardCharsets.UTF_8);
         try {
-            if (StringUtils.isBlank(key) || !key.contains(EventContract.delayeventPrefix)) {
+            if (StringUtils.isBlank(key)
+                    || !key.contains(EventContract.delayeventPrefix)
+                    || (key.contains(EventContract.delayeventPrefix) && key.contains(LOCKSUFFIX))) {
                 return;
             }
         } catch (Exception ex) {
             return;
         }
         String msg = new String(bytes, StandardCharsets.UTF_8);
-        String lock = key + ".lock";
+        String lock = key + LOCKSUFFIX;
         Long increment = increment(lock);
         if (increment == null || increment > 1) {
             return;
@@ -63,7 +70,7 @@ public class KeyExpiredListener extends KeyExpirationEventMessageListener {
         pusher.synSend(initEvent(key));
         // 删除具体事件
         redisTemplate.boundHashOps(EventContract.delayevent).delete(key);
-        redisTemplate.delete(lock);
+        // redisTemplate.delete(lock);
     }
 
     private Event initEvent(String key) {
@@ -79,13 +86,15 @@ public class KeyExpiredListener extends KeyExpirationEventMessageListener {
     }
 
 
-    public Long increment(final String key) {
+    public Long increment(final String lock) {
         try {
             ValueOperations<String, Object> operations = redisTemplate.opsForValue();
-            Long increment = operations.increment(key);
+            Long increment = operations.increment(lock);
+            this.redisTemplate.expire(lock, timeout, TimeUnit.SECONDS);
             return increment;
         } catch (Exception e) {
             e.printStackTrace();
+            logger.error(e.getMessage());
         }
         return null;
 
