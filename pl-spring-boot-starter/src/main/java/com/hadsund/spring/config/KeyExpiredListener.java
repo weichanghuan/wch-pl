@@ -96,6 +96,7 @@ public class KeyExpiredListener extends KeyExpirationEventMessageListener {
             e.printStackTrace();
             logger.error(e.getMessage());
         }
+
         return null;
 
     }
